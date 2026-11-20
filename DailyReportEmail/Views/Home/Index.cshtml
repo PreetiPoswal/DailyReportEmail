@@ -1,0 +1,333 @@
+﻿@model DailyReportEmail.Models.DailyReportModel
+
+@{
+    ViewData["Title"] = "Daily Demand Report";
+}
+
+<style>
+    body {
+        background: #f4f7fc;
+    }
+
+    .dashboard-header {
+        background: linear-gradient(135deg,#0d6efd,#3b82f6);
+        color: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin-top: 20px;
+        box-shadow: 0 5px 20px rgba(0,0,0,.15);
+    }
+
+    .card-box {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 3px 15px rgba(0,0,0,.12);
+        transition: .3s;
+    }
+
+        .card-box:hover {
+            transform: translateY(-5px);
+        }
+
+    .number {
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    .section-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #0d6efd;
+        margin-top: 35px;
+        margin-bottom: 15px;
+    }
+
+    .table {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .btn-custom {
+        border-radius: 10px;
+        padding: 12px 30px;
+        font-size: 18px;
+    }
+</style>
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="dashboard-header">
+
+    <h2>📊 Demand Daily Report</h2>
+
+    <h5>
+        Report Date :
+        @Model.ReportDate.ToString("dd MMM yyyy")
+    </h5>
+
+</div>
+
+<h3 class="section-title">
+    Demand Summary
+</h3>
+
+<div class="row">
+
+    <div class="col-md-3">
+
+        <div class="card card-box text-center p-4">
+
+            <h5>Today's Demand</h5>
+
+            <div class="number text-primary">
+                @Model.TodayDemand
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card card-box text-center p-4">
+
+            <h5>Approved</h5>
+
+            <div class="number text-success">
+                @Model.ApprovedDemand
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card card-box text-center p-4">
+
+            <h5>Pending</h5>
+
+            <div class="number text-warning">
+                @Model.PendingDemand
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card card-box text-center p-4">
+
+            <h5>Rejected</h5>
+
+            <div class="number text-danger">
+                @Model.RejectedDemand
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<h3 class="section-title">
+    Purchase Order Summary
+</h3>
+
+<table class="table table-bordered">
+
+    <tr>
+        <th>Today's PO</th>
+        <td>@Model.TodayPO</td>
+    </tr>
+
+    <tr>
+        <th>Approved PO</th>
+        <td>@Model.ApprovedPO</td>
+    </tr>
+
+    <tr>
+        <th>Pending PO</th>
+        <td>@Model.PendingPO</td>
+    </tr>
+
+    <tr>
+        <th>Rejected PO</th>
+        <td>@Model.RejectedPO</td>
+    </tr>
+
+    <tr>
+        <th>Locked Amount</th>
+        <td>₹ @Model.LockedPOAmount</td>
+    </tr>
+
+</table>
+<h3 class="section-title">
+    DMR Summary
+</h3>
+
+<div class="row">
+
+    <div class="col-md-3 mb-3">
+        <div class="card card-box text-center p-4">
+            <h5>Today's DMR</h5>
+            <div class="number text-primary">
+                @Model.TodayDMR
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card card-box text-center p-4">
+            <h5>Approved</h5>
+            <div class="number text-success">
+                @Model.ApprovedDMR
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card card-box text-center p-4">
+            <h5>Pending</h5>
+            <div class="number text-warning">
+                @Model.PendingDMR
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card card-box text-center p-4">
+            <h5>Rejected</h5>
+            <div class="number text-danger">
+                @Model.RejectedDMR
+            </div>
+        </div>
+    </div>
+
+</div>
+<h3 class="section-title">
+    Bill Payment Summary
+</h3>
+
+<div class="row">
+
+    <div class="col-md-3 mb-3">
+        <div class="card card-box text-center p-4">
+            <h5>Today's Payment</h5>
+            <div class="number text-primary">
+                @Model.TodayBillPayment
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card card-box text-center p-4">
+            <h5>Approved</h5>
+            <div class="number text-success">
+                @Model.ApprovedBillPayment
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card card-box text-center p-4">
+            <h5>Pending</h5>
+            <div class="number text-warning">
+                @Model.PendingBillPayment
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card card-box text-center p-4">
+            <h5>Rejected</h5>
+            <div class="number text-danger">
+                @Model.RejectedBillPayment
+            </div>
+        </div>
+    </div>
+
+</div>
+<h3 class="section-title">
+    Users Summary
+</h3>
+
+<div class="card card-box p-4">
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <h4>New Registered Users</h4>
+
+        </div>
+
+        <div class="col-md-6 text-end">
+
+            <h2 class="text-primary">
+                @Model.NewRegisteredUsers
+            </h2>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="text-center mt-5">
+
+    <form action="/Home/GeneratePdf" method="post" target="_blank">
+        <button type="submit" class="btn btn-primary btn-lg btn-custom me-3">
+            📄 Generate PDF
+        </button>
+    </form>
+
+    <br />
+
+    <form action="/Home/SendReport" method="post">
+        <button id="btnSend"
+                type="submit"
+                class="btn btn-success btn-lg btn-custom">
+            📧 Send Report
+        </button>
+    </form>
+
+</div>
+@section Scripts {
+
+    <script>
+        // Attach to the form submit event to ensure navigation/redirect works reliably
+        (function(){
+            var form = document.querySelector("form[action='/Home/SendReport']");
+            if (!form) return;
+            form.addEventListener('submit', function () {
+                try {
+                    var btn = form.querySelector('#btnSend');
+                    if (btn) {
+                        console.log('[UI] Send Report form submitted');
+                        btn.disabled = true;
+                        btn.innerHTML = 'Sending Report...';
+                    }
+                } catch (e) {
+                    console.log('[UI] Error in submit handler', e);
+                }
+            });
+        })();
+    </script>
+
+}
